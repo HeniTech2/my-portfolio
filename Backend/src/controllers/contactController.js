@@ -1,6 +1,15 @@
 import { sendContactEmail } from '../services/emailService.js';
 import { appendFile } from 'fs/promises';
 
+// simple HTML-escape to avoid injecting HTML into emails/logs
+const escapeHtml = (str = '') =>
+  String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
 export const submitContactForm = async (req, res) => {
   const { name, email, message } = req.body;
 
@@ -8,15 +17,20 @@ export const submitContactForm = async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
+  // sanitize inputs
+  const safeName = escapeHtml(name.trim());
+  const safeEmail = String(email).trim();
+  const safeMessage = escapeHtml(message.trim());
+
   try {
-    await sendContactEmail({ name, email, message });
+    await sendContactEmail({ name: safeName, email: safeEmail, message: safeMessage });
     return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Email error:', error);
 
     // Fallback: save message to a local log file so messages are not lost
     try {
-      const logEntry = `${new Date().toISOString()} | ${name} | ${email} | ${String(message).replace(/\n/g, ' ')}\n`;
+      const logEntry = `${new Date().toISOString()} | ${safeName} | ${safeEmail} | ${String(safeMessage).replace(/\n/g, ' ')}\n`;
       const logPath = new URL('../../messages.log', import.meta.url);
       await appendFile(logPath, logEntry, { encoding: 'utf8' });
       console.log('Contact message saved to messages.log');
