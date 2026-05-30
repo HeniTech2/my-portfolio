@@ -5,8 +5,8 @@ import { ReactTyped } from 'react-typed'
 const Hero = () => {
   const downloadCV = () => {
     const link = document.createElement('a')
-    link.href = '/Hnok_My_Resume.pdf'
-    link.download = 'Hnok_My_Resume.pdf'
+    link.href = '/Hnok_Amare_Resume.pdf'
+    link.download = 'Hnok_Amare_Resume.pdf'
     link.click()
   }
 
