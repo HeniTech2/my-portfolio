@@ -99,7 +99,7 @@ const Contact = () => {
                     <Github className="w-5 h-5 text-white" />
                   </a>
                   <a
-                    href="https://linkedin.com/in/henokamare"
+                    href="https://www.linkedin.com/in/henok-amare"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20"
