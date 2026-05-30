@@ -95,7 +95,7 @@ const Hero = () => {
               </a>
               <a href="https://t.me/Heni_12_21" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:underline">
                 <svg className="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path d="M21.6 3.5c-.3-.4-.8-.6-1.3-.5L2.6 9.1c-.7.2-.9.9-.4 1.3l4.2 3.2 1.6 5.2c.2.7.9.9 1.4.6l2.1-1.5 3.5 2.5c.5.3 1.1.2 1.5-.3.4-.5.5-1.1.2-1.6L9.7 7.6l11.2-4.1c.6-.2.9-.7.7-1.3z" />
+                  <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                 </svg>
                 <span className="text-sm">t.me/Heni_12_21</span>
               </a>
