@@ -5,8 +5,8 @@ import { ReactTyped } from 'react-typed'
 const Hero = () => {
   const downloadCV = () => {
     const link = document.createElement('a')
-    link.href = '/cv.pdf'
-    link.download = 'Henok_Amare_CV.pdf'
+    link.href = '/Hnok_My_Resume.pdf'
+    link.download = 'Hnok_My_Resume.pdf'
     link.click()
   }
 
@@ -61,7 +61,7 @@ const Hero = () => {
                 className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
               >
                 <Download className="w-5 h-5" />
-                Download CV
+                Download Resume
               </button>
               <a
                 href="#contact"
