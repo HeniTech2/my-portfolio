@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Download, ArrowRight } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight } from 'lucide-react'
 import { ReactTyped } from 'react-typed'
 
 const Hero = () => {
@@ -85,10 +85,14 @@ const Hero = () => {
                 <MapPin className="w-4 h-4 text-purple-400" />
                 <span className="text-sm">Addis Ababa, Ethiopia</span>
               </div>
-              <div className="flex items-center gap-2 text-gray-400">
+              <a href="https://github.com/HeniTech2" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:underline">
                 <Github className="w-4 h-4 text-purple-400" />
                 <span className="text-sm">github.com/HeniTech2</span>
-              </div>
+              </a>
+              <a href="https://www.linkedin.com/in/henok-amare" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:underline">
+                <Linkedin className="w-4 h-4 text-purple-400" />
+                <span className="text-sm">linkedin.com/in/henok-amare</span>
+              </a>
             </div>
           </motion.div>
 
