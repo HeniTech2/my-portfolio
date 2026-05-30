@@ -9,6 +9,14 @@ const Contact = () => {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+                  <a
+                    href="https://t.me/Heni_12_21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20"
+                  >
+                    <Send className="w-5 h-5 text-white" />
+                  </a>
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 

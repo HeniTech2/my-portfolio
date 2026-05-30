@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Send, Download, ArrowRight } from 'lucide-react'
 import { ReactTyped } from 'react-typed'
 
 const Hero = () => {
@@ -73,14 +73,14 @@ const Hero = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-6">
-              <div className="flex items-center gap-2 text-gray-400">
+              <a href="mailto:heni1500896@gmail.com" className="flex items-center gap-2 text-gray-400 hover:underline" aria-label="Email Henok" title="Email Henok">
                 <Mail className="w-4 h-4 text-purple-400" />
                 <span className="text-sm">heni1500896@gmail.com</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400">
+              </a>
+              <a href="tel:+251925325154" className="flex items-center gap-2 text-gray-400 hover:underline" aria-label="Call Henok" title="Call Henok">
                 <Phone className="w-4 h-4 text-purple-400" />
                 <span className="text-sm">+251 925325154</span>
-              </div>
+              </a>
               <div className="flex items-center gap-2 text-gray-400">
                 <MapPin className="w-4 h-4 text-purple-400" />
                 <span className="text-sm">Addis Ababa, Ethiopia</span>
@@ -92,6 +92,10 @@ const Hero = () => {
               <a href="https://www.linkedin.com/in/henok-amare" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:underline">
                 <Linkedin className="w-4 h-4 text-purple-400" />
                 <span className="text-sm">linkedin.com/in/henok-amare</span>
+              </a>
+              <a href="https://t.me/Heni_12_21" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-400 hover:underline">
+                <Send className="w-4 h-4 text-purple-400" />
+                <span className="text-sm">t.me/Heni_12_21</span>
               </a>
             </div>
           </motion.div>
