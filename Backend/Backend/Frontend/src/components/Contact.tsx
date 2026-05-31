@@ -6,7 +6,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -36,7 +35,7 @@ const Contact = () => {
 
       if (response.ok) {
         setSubmitted(true)
-        setFormData({ name: '', email: '', phone: '', message: '' })
+        setFormData({ name: '', email: '', message: '' })
         setTimeout(() => setSubmitted(false), 3000)
       } else {
         setError(data.error || 'Failed to send message. Please try again.')
@@ -158,20 +157,8 @@ const Contact = () => {
                       placeholder="your@email.com"
                     />
                   </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-gray-300 mb-2">Phone (optional)</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:border-white/50 transition-colors text-white placeholder:text-gray-400"
-                        placeholder="+1234567890"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-gray-300 mb-2">Message</label>
+                  <div>
+                    <label htmlFor="message" className="block text-gray-300 mb-2">Message</label>
                     <textarea
                       id="message"
                       name="message"

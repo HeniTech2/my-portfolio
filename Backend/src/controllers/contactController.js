@@ -24,7 +24,10 @@ export const submitContactForm = async (req, res) => {
   const safeMessage = escapeHtml(message.trim());
 
   try {
-    await sendContactEmail({ name: safeName, email: safeEmail, phone: safePhone, message: safeMessage });
+    const previewUrl = await sendContactEmail({ name: safeName, email: safeEmail, phone: safePhone, message: safeMessage });
+    if (previewUrl && process.env.NODE_ENV !== 'production') {
+      return res.status(200).json({ success: true, message: 'Email sent (preview)', previewUrl });
+    }
     return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Email error:', error);
