@@ -9,6 +9,10 @@ router.post(
 	[
 		body('name').trim().isLength({ min: 2, max: 100 }).withMessage('Invalid name'),
 		body('email').isEmail().normalizeEmail().withMessage('Invalid email'),
+		body('phone')
+			.optional({ checkFalsy: true })
+			.isMobilePhone('any')
+			.withMessage('Invalid phone number'),
 		body('message').trim().isLength({ min: 10, max: 2000 }).withMessage('Message is too short'),
 	],
 	async (req, res) => {

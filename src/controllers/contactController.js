@@ -11,26 +11,27 @@ const escapeHtml = (str = '') =>
     .replace(/'/g, '&#39;');
 
 export const submitContactForm = async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, phone, message } = req.body;
 
   if (!name || !email || !message) {
-    return res.status(400).json({ error: 'All fields are required' });
+    return res.status(400).json({ error: 'Name, email, and message are required' });
   }
 
   // sanitize inputs
   const safeName = escapeHtml(name.trim());
   const safeEmail = String(email).trim();
+  const safePhone = String(phone || '').trim();
   const safeMessage = escapeHtml(message.trim());
 
   try {
-    await sendContactEmail({ name: safeName, email: safeEmail, message: safeMessage });
+    await sendContactEmail({ name: safeName, email: safeEmail, phone: safePhone, message: safeMessage });
     return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Email error:', error);
 
     // Fallback: save message to a local log file so messages are not lost
     try {
-      const logEntry = `${new Date().toISOString()} | ${safeName} | ${safeEmail} | ${String(safeMessage).replace(/\n/g, ' ')}\n`;
+      const logEntry = `${new Date().toISOString()} | ${safeName} | ${safeEmail} | ${safePhone} | ${String(safeMessage).replace(/\n/g, ' ')}\n`;
       const logPath = new URL('../../messages.log', import.meta.url);
       await appendFile(logPath, logEntry, { encoding: 'utf8' });
       console.log('Contact message saved to messages.log');
