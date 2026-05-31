@@ -8,16 +8,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendContactEmail = async ({ name, email, phone, message }) => {
+export const sendContactEmail = async ({ name, email, message }) => {
   const mailOptions = {
     from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
     to: process.env.EMAIL_USER,
     subject: `New message from ${name}`,
     replyTo: email,
-    text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\n\nMessage:\n${message}`,
+    text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     html: `<p><strong>Name:</strong> ${name}</p>
            <p><strong>Email:</strong> ${email}</p>
-           <p><strong>Phone:</strong> ${phone || 'N/A'}</p>
            <p><strong>Message:</strong><br/>${message}</p>`,
   };
 
