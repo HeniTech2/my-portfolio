@@ -23,7 +23,7 @@ const Contact = () => {
     setIsSubmitting(true)
     setError('')
 
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/contact'
+    const API_URL = import.meta.env.VITE_API_URL
 
     try {
       const response = await fetch(API_URL, {
