@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: portfolio-backend
-    env: node
-    plan: free
-    branch: main
-    root: Backend
-    startCommand: "npm start"
-    buildCommand: ""

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react'
 
@@ -22,29 +23,40 @@ const Contact = () => {
     e.preventDefault()
     setIsSubmitting(true)
     setError('')
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
-    const API_URL = import.meta.env.VITE_API_URL
+    if (!serviceId || !templateId || !publicKey) {
+      setError('Email service not configured. Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY')
+      setIsSubmitting(false)
+      return
+    }
+
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    }
 
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setSubmitted(true)
-        setFormData({ name: '', email: '', phone: '', message: '' })
-        setTimeout(() => setSubmitted(false), 3000)
-      } else {
-        setError(data.error || 'Failed to send message. Please try again.')
-        console.error('Server error:', data)
+      try {
+        emailjs.init(publicKey)
+      } catch (initErr) {
+        console.warn('EmailJS init warning:', initErr)
       }
-    } catch (err) {
-      console.error('Network error:', err)
-      setError('Network error. Make sure the backend server is running on port 5000.')
+
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
+      console.log('EmailJS send result:', result)
+      setSubmitted(true)
+      setFormData({ name: '', email: '', phone: '', message: '' })
+      setTimeout(() => setSubmitted(false), 3000)
+    } catch (err: any) {
+      console.error('EmailJS error:', err)
+      // try to extract a useful message
+      const detailed = (err && (err.text || err.message)) ? (err.text || err.message) : null
+      setError(detailed ? `Failed to send message: ${detailed}` : 'Failed to send message. Please try again later.')
     } finally {
       setIsSubmitting(false)
     }

@@ -29,7 +29,7 @@ const AnimatedBackground = () => {
     interface StreamStar {
       x: number; y: number; speed: number; radius: number
       alpha: number; color: string
-      direction: 'down' | 'up' | 'right'; trailLength: number
+      direction: 'down' | 'up' | 'right' | 'left'; trailLength: number
     }
 
     const STAR_COUNT          = 30
@@ -142,6 +142,7 @@ const AnimatedBackground = () => {
         if (s.direction === 'down')  ty = -s.trailLength
         if (s.direction === 'up')    ty =  s.trailLength
         if (s.direction === 'right') tx = -s.trailLength
+        if (s.direction === 'left')  tx =  s.trailLength
 
         const grad = ctx.createLinearGradient(s.x+tx, s.y+ty, s.x, s.y)
         grad.addColorStop(0,   'rgba(0,0,0,0)')
