@@ -71,7 +71,7 @@ const Navbar = () => {
                         if (el) el.scrollIntoView({ behavior: 'smooth' })
                       }, 60)
                     }}
-                    className="text-2xl font-medium text-white"
+                    className="text-2xl font-medium text-white px-3 py-2 rounded-md hover:bg-white/10 hover:text-purple-300 active:scale-95 transition-transform"
                   >
                     {item}
                   </a>
