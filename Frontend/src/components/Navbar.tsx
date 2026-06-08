@@ -47,7 +47,7 @@ const Navbar = () => {
 
       {/* Mobile full-screen menu */}
       {open && (
-        <div className="fixed inset-0 z-60 bg-black/80 text-white p-6 overflow-auto flex flex-col">
+        <div className="fixed inset-0 z-60 bg-black/90 text-white p-6 overflow-y-auto flex flex-col min-h-screen">
           <div className="flex items-center justify-between">
             <Logo className="w-8 h-8" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 rounded-md">
@@ -56,7 +56,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex-1 flex items-center justify-center">
-            <nav className="flex flex-col gap-4">
+            <nav className="flex flex-col gap-6 w-full max-w-md">
               {navItems.map((item) => {
                 const id = item.toLowerCase()
                 return (
@@ -71,7 +71,7 @@ const Navbar = () => {
                         if (el) el.scrollIntoView({ behavior: 'smooth' })
                       }, 60)
                     }}
-                    className="text-2xl font-medium text-white px-3 py-2 rounded-md hover:bg-white/10 hover:text-purple-300 active:scale-95 transition-transform"
+                    className="block text-2xl font-semibold text-white px-4 py-3 rounded-md hover:bg-white/10 hover:text-purple-300 active:scale-95 transition-transform opacity-100"
                   >
                     {item}
                   </a>
