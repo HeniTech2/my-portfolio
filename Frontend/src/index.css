@@ -62,4 +62,13 @@
   html {
     scroll-behavior: smooth;
   }
+
+  p {
+    text-align: justify;
+    text-justify: inter-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    line-height: 1.7;
+  }
 }
