@@ -71,17 +71,13 @@ const Navbar = () => {
                         if (el) el.scrollIntoView({ behavior: 'smooth' })
                       }, 60)
                     }}
-                    className="text-2xl font-medium"
+                    className="text-2xl font-medium text-white"
                   >
                     {item}
                   </a>
                 )
               })}
             </nav>
-
-            <div className="pt-6 border-t border-white/10">
-              <HeroMenu onClose={() => setOpen(false)} />
-            </div>
           </div>
         </div>
       )}
