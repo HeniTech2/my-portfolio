@@ -9,28 +9,27 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/20">
-      <div className="w-full px-4 py-4 relative">
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="fixed left-4 top-4 z-70"
-        >
-          <a href="#hero" className="block">
-            <Logo className="w-10 h-10" />
-          </a>
-        </motion.div>
+    <motion.nav
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md"
+    >
+      <div className="flex items-center justify-between px-6 py-4">
 
-        <div className="hidden md:flex flex-1 gap-6 flex-wrap justify-center">
+        {/* Logo */}
+        <Logo />
+
+        {/* Desktop menu */}
+        <div className="hidden md:flex gap-6">
           {navItems.map((item, idx) => (
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="text-gray-200 hover:text-white transition-colors text-sm md:text-base"
+              className="text-gray-200 hover:text-white transition-colors"
             >
               {item}
             </motion.a>
@@ -38,52 +37,42 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden">
-          <div className="fixed right-4 top-4 z-70">
-            <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-2 rounded-md">
-              <Menu className="w-6 h-6 text-white" />
-            </button>
-          </div>
-        </div>
+        <button
+          onClick={() => setOpen(true)}
+          className="md:hidden p-2"
+        >
+          <Menu className="w-6 h-6 text-white" />
+        </button>
       </div>
 
-      {/* Mobile full-screen menu */}
+      {/* Mobile menu */}
       {open && (
-        <div className="fixed inset-0 z-60 bg-black/90 text-white p-6 overflow-y-auto flex flex-col min-h-screen">
-          <div className="flex items-center justify-between">
-            <Logo className="w-8 h-8" />
-            <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 rounded-md">
-              <X className="w-6 h-6 text-white" />
+        <div className="fixed inset-0 z-50 bg-black/95 text-white flex flex-col">
+          
+          <div className="flex items-center justify-between px-6 py-4">
+            <Logo />
+            <button onClick={() => setOpen(false)}>
+              <X className="w-6 h-6" />
             </button>
           </div>
 
           <div className="flex-1 flex items-center justify-center">
-            <nav className="flex flex-col gap-6 w-full max-w-md">
-              {navItems.map((item) => {
-                const id = item.toLowerCase()
-                return (
-                  <a
-                    key={item}
-                    href={`#${id}`}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      setOpen(false)
-                      setTimeout(() => {
-                        const el = document.getElementById(id)
-                        if (el) el.scrollIntoView({ behavior: 'smooth' })
-                      }, 60)
-                    }}
-                    className="block text-2xl font-semibold text-white px-4 py-3 rounded-md hover:bg-white/10 hover:text-purple-300 active:scale-95 transition-transform opacity-100"
-                  >
-                    {item}
-                  </a>
-                )
-              })}
-            </nav>
+            <div className="flex flex-col gap-6 text-center text-2xl">
+              {navItems.map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  onClick={() => setOpen(false)}
+                  className="hover:text-purple-400"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   )
 }
 
