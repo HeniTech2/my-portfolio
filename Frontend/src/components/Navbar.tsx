@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import Logo from './Logo'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import HeroMenu from './HeroMenu'
 
 const navItems = ['Experience', 'Education', 'Skills', 'Projects', 'Contact']
 
