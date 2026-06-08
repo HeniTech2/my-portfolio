@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/20">
-      <div className="max-w-7xl mx-0 px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div className="max-w-7xl mx-0 px-6 py-4 flex flex-row justify-between items-center gap-4">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
