@@ -96,7 +96,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20" style={{ scrollMarginTop: '6rem' }}>
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-0 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
