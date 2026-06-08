@@ -16,7 +16,7 @@ const Navbar = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="absolute left-4 top-1/2 -translate-y-1/2"
+          className="fixed left-4 top-4 z-70"
         >
           <a href="#hero" className="block">
             <Logo className="w-10 h-10" />
@@ -40,7 +40,7 @@ const Navbar = () => {
 
         {/* Mobile menu button */}
         <div className="md:hidden">
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <div className="fixed right-4 top-4 z-70">
             <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-2 rounded-md">
               <Menu className="w-6 h-6 text-white" />
             </button>
