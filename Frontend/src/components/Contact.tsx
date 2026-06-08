@@ -1,34 +1,51 @@
-import { useState } from 'react'
+import { useState, ChangeEvent, FormEvent } from 'react'
 import emailjs from '@emailjs/browser'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from 'lucide-react'
 
+type FormData = {
+  name: string
+  email: string
+  phone: string
+  message: string
+}
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     message: ''
   })
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value } as FormData))
     setError('')
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+
+    if (isSubmitting) return
+
     setIsSubmitting(true)
     setError('')
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
+    const env = (import.meta as any).env
+    const serviceId = env.VITE_EMAILJS_SERVICE_ID
+    const templateId = env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = env.VITE_EMAILJS_PUBLIC_KEY
+
+    // ❗ ENV CHECK
     if (!serviceId || !templateId || !publicKey) {
-      setError('Email service not configured. Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY')
+      setError(
+        'Email service not configured. Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY'
+      )
       setIsSubmitting(false)
       return
     }
@@ -37,176 +54,182 @@ const Contact = () => {
       from_name: formData.name,
       from_email: formData.email,
       phone: formData.phone,
-      message: formData.message,
+      message: formData.message
     }
 
     try {
-      try {
-        emailjs.init(publicKey)
-      } catch (initErr) {
-        console.warn('EmailJS init warning:', initErr)
-      }
+      // init EmailJS once per submit
+      emailjs.init(publicKey)
 
-      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey)
-      console.log('EmailJS send result:', result)
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      )
+
+      console.log('Email sent successfully:', result)
+
       setSubmitted(true)
-      setFormData({ name: '', email: '', phone: '', message: '' })
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      })
+
       setTimeout(() => setSubmitted(false), 3000)
     } catch (err: any) {
       console.error('EmailJS error:', err)
-      // try to extract a useful message
-      const detailed = (err && (err.text || err.message)) ? (err.text || err.message) : null
-      setError(detailed ? `Failed to send message: ${detailed}` : 'Failed to send message. Please try again later.')
+
+      const msg = err?.text || err?.message
+
+      setError(
+        msg
+          ? `Message failed: ${msg}`
+          : 'Message failed. Please try again later.'
+      )
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
-      <div className="max-w-5xl w-full">
+    <section className="py-20">
+      <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center gap-3 mb-12">
-            <Mail className="w-8 h-8 text-white" />
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Contact</h2>
-          </div>
+          <h2 className="text-4xl font-bold text-center mb-12 text-white">
+            Contact
+          </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Left column */}
+            {/* LEFT SIDE */}
             <div className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold mb-6 text-white">Get In Touch</h3>
+              <h3 className="text-2xl font-bold mb-6 text-white">
+                Get In Touch
+              </h3>
+
               <p className="text-gray-300 mb-8">
-                I'm always open to new opportunities and collaborations. Feel free to reach out!
+                I'm always open to new opportunities and collaborations.
               </p>
+
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-white" />
-                  <a href="mailto:heni1500896@gmail.com" className="text-gray-300 hover:text-white transition-colors">
+                  <a
+                    href="mailto:heni1500896@gmail.com"
+                    className="text-gray-300 hover:text-white"
+                  >
                     heni1500896@gmail.com
                   </a>
                 </div>
+
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-white" />
                   <span className="text-gray-300">+251 925325154</span>
                 </div>
+
                 <div className="flex items-center gap-3">
                   <MapPin className="w-5 h-5 text-white" />
-                  <span className="text-gray-300">Addis Ababa, Ethiopia</span>
+                  <span className="text-gray-300">
+                    Addis Ababa, Ethiopia
+                  </span>
                 </div>
               </div>
 
               <div className="mt-8 pt-6 border-t border-white/20">
-                <h4 className="text-lg font-semibold text-white mb-4">Connect With Me</h4>
+                <h4 className="text-lg font-semibold text-white mb-4">
+                  Connect With Me
+                </h4>
+
                 <div className="flex gap-4">
                   <a
                     href="https://github.com/HeniTech2"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20"
                   >
                     <Github className="w-5 h-5 text-white" />
                   </a>
+
                   <a
                     href="https://www.linkedin.com/in/henok-amare"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20"
                   >
                     <Linkedin className="w-5 h-5 text-white" />
-                  </a>
-                  <a
-                    href="https://t.me/Heni_12_21"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all border border-white/20"
-                  >
-                    <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                    </svg>
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Right column */}
+            {/* RIGHT SIDE */}
             <div className="p-8 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/20">
-              <h3 className="text-2xl font-bold mb-6 text-white">Send a Message</h3>
-              
+              <h3 className="text-2xl font-bold mb-6 text-white">
+                Send a Message
+              </h3>
+
               {submitted ? (
-                <div className="text-center py-12">
-                  <div className="text-green-400 text-xl mb-2">✓ Message sent!</div>
-                  <p className="text-gray-400">I'll get back to you soon.</p>
+                <div className="text-center py-12 text-green-400">
+                  ✓ Message sent successfully!
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <label htmlFor="name" className="block text-gray-300 mb-2">Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:border-white/50 transition-colors text-white placeholder:text-gray-400"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-gray-300 mb-2">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:border-white/50 transition-colors text-white placeholder:text-gray-400"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-gray-300 mb-2">Phone (optional)</label>
-                      <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:border-white/50 transition-colors text-white placeholder:text-gray-400"
-                        placeholder="+1234567890"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-gray-300 mb-2">Message</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:border-white/50 transition-colors text-white placeholder:text-gray-400 resize-none"
-                      placeholder="Your message..."
-                    />
-                  </div>
+                  <input
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Name"
+                    required
+                    className="w-full p-3 bg-white/10 text-white rounded-xl"
+                  />
+
+                  <input
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    required
+                    className="w-full p-3 bg-white/10 text-white rounded-xl"
+                  />
+
+                  <input
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone"
+                    className="w-full p-3 bg-white/10 text-white rounded-xl"
+                  />
+
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Message"
+                    required
+                    rows={5}
+                    className="w-full p-3 bg-white/10 text-white rounded-xl"
+                  />
+
+                  {/* ERROR DISPLAY */}
                   {error && (
-                    <div className="text-red-400 text-sm text-center">{error}</div>
+                    <div className="text-red-400 text-sm text-center">
+                      {error}
+                    </div>
                   )}
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-500 rounded-xl hover:shadow-lg hover:shadow-white/20 transition-all disabled:opacity-50 text-white"
+                    className="w-full flex items-center justify-center gap-2 bg-gray-700 text-white p-3 rounded-xl disabled:opacity-50"
                   >
                     {isSubmitting ? 'Sending...' : (
                       <>
-                        Send Message
-                        <Send className="w-4 h-4" />
+                        Send Message <Send size={16} />
                       </>
                     )}
                   </button>
