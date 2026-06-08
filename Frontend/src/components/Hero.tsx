@@ -11,21 +11,21 @@ const Hero = () => {
   }
 
   return (
-    <section className="min-h-screen flex items-center">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-10">
+    <section className="min-h-[85vh] flex items-center pt-16">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
 
         {/* LEFT SIDE */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="space-y-6 flex-1"
+          className="space-y-5 flex-1 max-w-xl"
         >
           <div className="text-purple-400 font-medium">
             Available for work
           </div>
 
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
             <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
               Hi, I'm Henok
             </span>
@@ -46,8 +46,8 @@ const Hero = () => {
             />
           </div>
 
-          <p className="text-gray-400 text-lg max-w-lg leading-relaxed">
-            Passionate about building scalable web applications and creating seamless user experiences. 
+          <p className="text-gray-400 text-base leading-relaxed max-w-md">
+            Passionate about building scalable web applications and creating seamless user experiences.
             Focused on clean, efficient code and modern technologies.
           </p>
 
@@ -114,7 +114,7 @@ const Hero = () => {
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-cyan-500/30 rounded-full blur-2xl animate-pulse" />
 
-            <div className="relative w-80 h-80 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20">
+            <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20">
               <img
                 src="/p1.jpg"
                 alt="Henok Amare"

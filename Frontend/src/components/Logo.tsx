@@ -5,9 +5,9 @@ interface LogoProps {
   src?: string
 }
 
-const Logo = ({ className = "w-24 h-24", src = "/Logo.svg" }: LogoProps) => {
+const Logo = ({ className = "w-8 h-8", src = "/Logo.svg" }: LogoProps) => {
   return (
-    <div className="rounded-full bg-white/10 p-3 backdrop-blur-sm">
+    <div className="flex items-center">
       <motion.img
         src={src}
         alt="Logo"
