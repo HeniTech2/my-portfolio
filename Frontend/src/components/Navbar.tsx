@@ -57,11 +57,26 @@ const Navbar = () => {
 
           <div className="space-y-6">
             <nav className="flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setOpen(false)} className="text-2xl font-medium">
-                  {item}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const id = item.toLowerCase()
+                return (
+                  <a
+                    key={item}
+                    href={`#${id}`}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setOpen(false)
+                      setTimeout(() => {
+                        const el = document.getElementById(id)
+                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                      }, 60)
+                    }}
+                    className="text-2xl font-medium"
+                  >
+                    {item}
+                  </a>
+                )
+              })}
             </nav>
 
             <div className="pt-6 border-t border-white/10">
