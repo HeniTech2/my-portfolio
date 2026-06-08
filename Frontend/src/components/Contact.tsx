@@ -163,6 +163,17 @@ const Contact = () => {
                   >
                     <Linkedin className="w-5 h-5 text-white" />
                   </a>
+
+                  <a
+                    href="https://t.me/Heni_12_21"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Telegram"
+                  >
+                    <svg className="w-5 h-5 fill-current text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true">
+                      <path d="M120 0C53.73 0 0 53.73 0 120s53.73 120 120 120 120-53.73 120-120S186.27 0 120 0zm56.4 82.7l-20.7 97.8c-1.6 6-5.8 7.5-11.7 4.7l-32.3-23.8-15.6 15c-1.7 1.7-3.1 3.1-6.3 3.1l2.3-33.1 60.1-54.1c2.6-2.3-0.6-3.6-4-1.3L73.6 131.4 35 117.8c-6.1-1.9-6.2-6.1 1.2-9l108.2-41.7c5-1.9 9.3 1.2 7.6 15.6z" />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
