@@ -11,15 +11,15 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/20">
-      <div className="w-full px-4 py-4 flex flex-row justify-between items-center gap-4">
+      <div className="w-full px-4 py-4 relative">
         <motion.div
-          className="flex-none"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
+          className="absolute left-4 top-1/2 -translate-y-1/2"
         >
           <a href="#hero" className="block">
-            <Logo className="w-10 h-10" />   {/* slightly larger logo, no text */}
+            <Logo className="w-10 h-10" />
           </a>
         </motion.div>
 
@@ -39,10 +39,12 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden flex items-center flex-none">
-          <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-2 rounded-md">
-            <Menu className="w-6 h-6 text-white" />
-          </button>
+        <div className="md:hidden">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+            <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-2 rounded-md">
+              <Menu className="w-6 h-6 text-white" />
+            </button>
+          </div>
         </div>
       </div>
 
