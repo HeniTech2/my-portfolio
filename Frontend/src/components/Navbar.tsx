@@ -11,8 +11,9 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-md border-b border-white/20">
-      <div className="max-w-7xl mx-0 px-6 py-4 flex flex-row justify-between items-center gap-4">
+      <div className="max-w-7xl w-full mx-0 px-6 py-4 flex flex-row justify-between items-center gap-4">
         <motion.div
+          className="flex-none"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -22,7 +23,7 @@ const Navbar = () => {
           </a>
         </motion.div>
 
-        <div className="hidden md:flex gap-6 flex-wrap justify-center">
+        <div className="hidden md:flex flex-1 gap-6 flex-wrap justify-center">
           {navItems.map((item, idx) => (
             <motion.a
               key={item}
@@ -38,7 +39,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center flex-none">
           <button onClick={() => setOpen(true)} aria-label="Open menu" className="p-2 rounded-md">
             <Menu className="w-6 h-6 text-white" />
           </button>
