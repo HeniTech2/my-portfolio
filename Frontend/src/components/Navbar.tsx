@@ -47,15 +47,15 @@ const Navbar = () => {
 
       {/* Mobile full-screen menu */}
       {open && (
-        <div className="fixed inset-0 z-60 bg-black/80 text-white p-6 overflow-auto">
-          <div className="flex items-center justify-between mb-6">
+        <div className="fixed inset-0 z-60 bg-black/80 text-white p-6 overflow-auto flex flex-col">
+          <div className="flex items-center justify-between">
             <Logo className="w-8 h-8" />
             <button onClick={() => setOpen(false)} aria-label="Close menu" className="p-2 rounded-md">
               <X className="w-6 h-6 text-white" />
             </button>
           </div>
 
-          <div className="space-y-6">
+          <div className="flex-1 flex items-center justify-center">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) => {
                 const id = item.toLowerCase()
