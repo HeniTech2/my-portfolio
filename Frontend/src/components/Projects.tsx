@@ -3,6 +3,12 @@ import { Github, ExternalLink } from 'lucide-react'
 
 const projects = [
   {
+    name: 'Marqato',
+    desc: 'Full‑stack Ethiopian e‑commerce marketplace with an AI shopping assistant, CBE bank transfer checkout, and admin dashboard.',
+    tags: ['React', 'Express', 'Prisma', 'PostgreSQL', 'Gemini AI'],
+    link: 'https://e-commerce-web-app-nine-puce.vercel.app',
+  },
+  {
     name: 'Apple-Backe-Front',
     desc: 'Full‑stack application (Apple‑style frontend with robust backend) – built with modern web technologies.',
     tags: ['React', 'Node.js', 'Express'],
