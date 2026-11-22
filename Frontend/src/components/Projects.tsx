@@ -7,35 +7,27 @@ interface Project {
   tags: string[]
   demo?: string   // live deployed site -> shows "Live Demo" button
   github?: string // source code -> shows "GitHub" button
+  inProgress?: boolean // shows an "In progress" label
 }
 
 const projects: Project[] = [
   {
-    name: 'Kidus Gebrael HMS',
-    desc: 'Web-based hospital management system (HMS) frontend, deployed live on Render.',
-    tags: ['React', 'Frontend', 'Render'],
+    name: 'Kidus Gebrael Hospital Management System',
+    desc: 'Hospital management system for a medical clinic with role-based access for reception, doctors, pharmacy and admin. Covers patient registration, appointments, medical inventory and a public website with an admin content manager, in English and Amharic.',
+    tags: ['React', 'Node.js', 'Express', 'MySQL', 'Tailwind CSS'],
     demo: 'https://khms-frontend.onrender.com',
   },
   {
-    name: 'Marqato',
-    desc: 'Full‑stack Ethiopian e‑commerce marketplace with an AI shopping assistant, CBE bank transfer checkout, and admin dashboard.',
-    tags: ['React', 'Express', 'Prisma', 'PostgreSQL', 'Gemini AI'],
+    name: 'Marqato – Ethiopian Handmade Goods Marketplace',
+    desc: 'Full‑stack e‑commerce marketplace with product, cart and order management, online payments (Chapa), manual bank‑transfer checkout with admin approval, reviews, coupons and English/Amharic support.',
+    tags: ['React', 'Express', 'Prisma', 'PostgreSQL'],
     demo: 'https://e-commerce-web-app-nine-puce.vercel.app',
   },
   {
-    name: 'Streamline – Hotel Operations Platform',
-    desc: 'Lead developer (frontend + backend). Delivered booking management, staff scheduling, and reporting features to reduce manual tasks for hotel staff.',
-    tags: ['React', 'Node.js', 'MySQL'],
-  },
-  {
-    name: 'Customer Satisfaction Monitoring System',
-    desc: 'Backend and dashboard developer. Built data collection endpoints and a dashboard that visualizes satisfaction metrics so managers can act on feedback faster.',
-    tags: ['React', 'Node.js', 'MongoDB'],
-  },
-  {
-    name: 'Technosophia IT Solutions Website',
-    desc: 'Responsive marketing website for an IT solutions company, built with accessibility fixes and a clean, fast layout.',
-    tags: ['Next.js', 'Tailwind CSS'],
+    name: 'College Management System',
+    desc: 'Full‑stack college management system with 24 modules for admin, teacher and student roles, built on a config‑driven frontend and a generic CRUD API.',
+    tags: ['React', 'Vite', 'Tailwind CSS', 'Express', 'Prisma', 'PostgreSQL'],
+    inProgress: true,
   },
 ]
 
@@ -70,6 +62,12 @@ const Projects = () => {
                     <span className="flex items-center gap-1.5 shrink-0 mt-1.5 text-xs text-green-300">
                       <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                       Live
+                    </span>
+                  )}
+                  {project.inProgress && (
+                    <span className="flex items-center gap-1.5 shrink-0 mt-1.5 text-xs text-amber-300">
+                      <span className="w-2 h-2 rounded-full bg-amber-400" />
+                      In progress
                     </span>
                   )}
                 </div>
