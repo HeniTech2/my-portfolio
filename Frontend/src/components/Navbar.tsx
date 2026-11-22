@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import Logo from './Logo'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 
 const navItems = ['Experience', 'Education', 'Skills', 'Projects', 'Contact']
@@ -8,52 +8,68 @@ const navItems = ['Experience', 'Education', 'Skills', 'Projects', 'Contact']
 const Navbar = () => {
   const [open, setOpen] = useState(false)
 
+  // Stop the page from scrolling behind the menu while it is open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 w-full z-50 bg-black/40 backdrop-blur-md"
-    >
-      {/* MAIN NAVBAR CONTAINER */}
-      <div className="flex items-center justify-between px-6 py-4">
+    <>
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="fixed top-0 left-0 w-full z-50 bg-black/80 md:bg-black/40 backdrop-blur-md"
+      >
+        {/* MAIN NAVBAR CONTAINER */}
+        <div className="flex items-center justify-between px-6 py-4">
 
-        {/* LOGO */}
-        <Logo />
+          {/* LOGO */}
+          <Logo />
 
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex gap-6">
-          {navItems.map((item, idx) => (
-            <motion.a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.1 }}
-              className="text-gray-200 hover:text-white transition-colors text-sm"
-            >
-              {item}
-            </motion.a>
-          ))}
+          {/* DESKTOP MENU */}
+          <div className="hidden md:flex gap-6">
+            {navItems.map((item, idx) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: idx * 0.1 }}
+                className="text-gray-200 hover:text-white transition-colors text-sm"
+              >
+                {item}
+              </motion.a>
+            ))}
+          </div>
+
+          {/* MOBILE MENU BUTTON */}
+          <button
+            onClick={() => setOpen(true)}
+            className="md:hidden p-2"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6 text-white" />
+          </button>
         </div>
+      </motion.nav>
 
-        {/* MOBILE MENU BUTTON */}
-        <button
-          onClick={() => setOpen(true)}
-          className="md:hidden p-2"
-        >
-          <Menu className="w-6 h-6 text-white" />
-        </button>
-      </div>
-
-      {/* MOBILE FULL SCREEN MENU */}
+      {/*
+        MOBILE FULL SCREEN MENU
+        It is OUTSIDE the <nav> on purpose. The nav uses backdrop-blur and a
+        motion transform, and both of those make "fixed" children size
+        themselves to the nav instead of the whole screen. That was the bug.
+      */}
       {open && (
-        <div className="fixed inset-0 z-50 bg-black/95 text-white flex flex-col">
+        <div className="fixed inset-0 z-[60] bg-black text-white flex flex-col">
 
           {/* TOP BAR */}
           <div className="flex items-center justify-between px-6 py-4">
             <Logo />
-            <button onClick={() => setOpen(false)}>
+            <button onClick={() => setOpen(false)} aria-label="Close menu">
               <X className="w-6 h-6 text-white" />
             </button>
           </div>
@@ -76,7 +92,7 @@ const Navbar = () => {
 
         </div>
       )}
-    </motion.nav>
+    </>
   )
 }
 
