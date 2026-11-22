@@ -1,11 +1,22 @@
 import { motion } from 'framer-motion'
-import { GraduationCap, Award } from 'lucide-react'
+import { GraduationCap, Award, ExternalLink } from 'lucide-react'
 
 const certifications = [
-  { name: 'AWS Certified Solutions Architect', issuer: 'Amazon Web Services', year: '2024' },
-  { name: 'Professional Scrum Master', issuer: 'Scrum.org', year: '2023' },
-  { name: 'React Advanced Certification', issuer: 'Meta', year: '2023' },
-  { name: 'MongoDB Certified Developer', issuer: 'MongoDB University', year: '2022' },
+  {
+    name: 'Front-End Web Developer',
+    issuer: 'Udacity',
+    url: 'https://udacity.com/certificate/e/fdf2a70a-9ba8-11ef-ab08-af1a2abb5846',
+  },
+  {
+    name: 'Full Stack Web Developer',
+    issuer: 'Udacity',
+    url: 'https://udacity.com/certificate/e/3b3ab57c-8b95-11ef-b147-836f920d30df',
+  },
+  {
+    name: 'Programming Foundations',
+    issuer: 'Udacity',
+    url: 'https://udacity.com/certificate/e/43bc9f78-71d0-11ef-8255-8b22f606d50d',
+  },
 ]
 
 const Education = () => {
@@ -28,24 +39,21 @@ const Education = () => {
               <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                 <div>
                   <h3 className="text-2xl font-bold text-white">
-                    Bachelor of Science in Software Engineering (In Progress)
+                    BSc in Software Engineering
                   </h3>
                   <p className="text-xl text-gray-300">Injibara University</p>
                 </div>
-                <span className="text-gray-400 mt-2 md:mt-0">2022 – Present · Junior Year</span>
+                <span className="text-gray-400 mt-2 md:mt-0">2023 – 2028 (Expected)</span>
               </div>
-              <p className="text-gray-300 mb-2">
-                🎓 Currently learning: Full‑stack development, algorithms, database design, and software architecture.
-              </p>
               <p className="text-gray-300">
-                📚 Active coursework: Data Structures, Web Development, Object‑Oriented Programming, Software Engineering Principles.
+                Project: Streamline – hotel operations platform.
               </p>
             </div>
 
             <div className="mt-8">
               <div className="flex items-center gap-3 mb-6">
                 <Award className="w-7 h-7 text-white" />
-                <h3 className="text-3xl font-bold text-white">Certifications & Training</h3>
+                <h3 className="text-3xl font-bold text-white">Certifications</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 {certifications.map((cert, idx) => (
@@ -58,9 +66,16 @@ const Education = () => {
                     className="p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/20"
                   >
                     <h4 className="font-bold text-white">{cert.name}</h4>
-                    <p className="text-gray-400 text-sm">
-                      {cert.issuer} • {cert.year}
-                    </p>
+                    <p className="text-gray-400 text-sm mb-3">{cert.issuer}</p>
+                    <a
+                      href={cert.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-cyan-300 hover:text-cyan-200 transition-colors"
+                    >
+                      View certificate
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
                   </motion.div>
                 ))}
               </div>
