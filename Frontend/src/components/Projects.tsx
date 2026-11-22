@@ -1,48 +1,41 @@
 import { motion } from 'framer-motion'
 import { Github, ExternalLink } from 'lucide-react'
 
-const projects = [
+interface Project {
+  name: string
+  desc: string
+  tags: string[]
+  demo?: string   // live deployed site -> shows "Live Demo" button
+  github?: string // source code -> shows "GitHub" button
+}
+
+const projects: Project[] = [
   {
     name: 'Kidus Gebrael HMS',
     desc: 'Web-based hospital management system (HMS) frontend, deployed live on Render.',
     tags: ['React', 'Frontend', 'Render'],
-    link: 'https://khms-frontend.onrender.com',
+    demo: 'https://khms-frontend.onrender.com',
   },
   {
     name: 'Marqato',
     desc: 'Full‑stack Ethiopian e‑commerce marketplace with an AI shopping assistant, CBE bank transfer checkout, and admin dashboard.',
     tags: ['React', 'Express', 'Prisma', 'PostgreSQL', 'Gemini AI'],
-    link: 'https://e-commerce-web-app-nine-puce.vercel.app',
+    demo: 'https://e-commerce-web-app-nine-puce.vercel.app',
   },
   {
-    name: 'Apple-Backe-Front',
-    desc: 'Full‑stack application (Apple‑style frontend with robust backend) – built with modern web technologies.',
-    tags: ['React', 'Node.js', 'Express'],
-    link: 'https://github.com/HeniTech2/Apple-Backe-Front',
+    name: 'Streamline – Hotel Operations Platform',
+    desc: 'Lead developer (frontend + backend). Delivered booking management, staff scheduling, and reporting features to reduce manual tasks for hotel staff.',
+    tags: ['React', 'Node.js', 'MySQL'],
   },
   {
-    name: 'Customer_Management',
-    desc: 'System for managing customer data, orders, and CRM workflows.',
-    tags: ['JavaScript', 'MongoDB', 'REST API'],
-    link: 'https://github.com/HeniTech2/Customer_Management',
+    name: 'Customer Satisfaction Monitoring System',
+    desc: 'Backend and dashboard developer. Built data collection endpoints and a dashboard that visualizes satisfaction metrics so managers can act on feedback faster.',
+    tags: ['React', 'Node.js', 'MongoDB'],
   },
   {
-    name: 'My-App',
-    desc: 'Personal dashboard or utility app – clean UI and interactive features.',
-    tags: ['React', 'Tailwind CSS', 'Vite'],
-    link: 'https://github.com/HeniTech2/My-App',
-  },
-  {
-    name: 'online-Auction',
-    desc: 'Auction platform where users can list, bid, and win items in real time.',
-    tags: ['Socket.io', 'Node.js', 'PostgreSQL'],
-    link: 'https://github.com/HeniTech2/online-Auction',
-  },
-  {
-    name: 'Team-Chat-App',
-    desc: 'Real‑time team messaging with channels, direct messages, and file sharing.',
-    tags: ['WebSocket', 'React', 'MongoDB'],
-    link: 'https://github.com/HeniTech2/Team-Chat-App',
+    name: 'Technosophia IT Solutions Website',
+    desc: 'Responsive marketing website for an IT solutions company, built with accessibility fixes and a clean, fast layout.',
+    tags: ['Next.js', 'Tailwind CSS'],
   },
 ]
 
@@ -58,37 +51,67 @@ const Projects = () => {
         >
           <div className="flex items-center gap-3 mb-12">
             <Github className="w-8 h-8 text-white" />
-            <h2 className="text-4xl md:text-5xl font-bold text-white">My GitHub Projects</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white">My Projects</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, idx) => (
-              <motion.a
+              <motion.div
                 key={project.name}
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.1 }}
                 viewport={{ once: true }}
-                className="group p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/20 hover:border-white/40 transition-all cursor-pointer"
+                className="flex flex-col p-8 bg-white/5 backdrop-blur-sm rounded-3xl border border-white/20 hover:border-white/40 transition-all"
               >
-                <div className="flex justify-between items-start mb-3">
-                  <h3 className="text-2xl font-bold text-white group-hover:text-gray-200 transition-colors">
-                    {project.name}
-                  </h3>
-                  <ExternalLink className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" />
+                <div className="flex justify-between items-start mb-3 gap-3">
+                  <h3 className="text-2xl font-bold text-white">{project.name}</h3>
+                  {project.demo && (
+                    <span className="flex items-center gap-1.5 shrink-0 mt-1.5 text-xs text-green-300">
+                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                      Live
+                    </span>
+                  )}
                 </div>
+
                 <p className="text-gray-300 mb-4">{project.desc}</p>
-                <div className="flex flex-wrap gap-2">
+
+                <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag) => (
                     <span key={tag} className="px-3 py-1 bg-white/20 rounded-full text-sm text-white">
                       {tag}
                     </span>
                   ))}
                 </div>
-              </motion.a>
+
+                {/* BUTTONS (only shown when the project has a link) */}
+                {(project.demo || project.github) && (
+                <div className="flex flex-wrap gap-3 mt-auto">
+                  {project.demo && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium hover:opacity-90 transition-opacity"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Live Demo
+                    </a>
+                  )}
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/30 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                    >
+                      <Github className="w-4 h-4" />
+                      GitHub
+                    </a>
+                  )}
+                </div>
+                )}
+              </motion.div>
             ))}
           </div>
         </motion.div>
