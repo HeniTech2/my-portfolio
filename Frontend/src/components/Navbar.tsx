@@ -3,7 +3,7 @@ import Logo from './Logo'
 import { useState, useEffect } from 'react'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
-const navItems = ['Experience', 'Education', 'Skills', 'Projects', 'Contact']
+const navItems = ['Journey', 'Education', 'Skills', 'Projects', 'Contact']
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
