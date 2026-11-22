@@ -1,15 +1,8 @@
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight, Eye } from 'lucide-react'
 import { ReactTyped } from 'react-typed'
 
 const Hero = () => {
-  const downloadCV = () => {
-    const link = document.createElement('a')
-    link.href = '/Hnok_Amare_Resume.pdf'
-    link.download = 'Hnok_Amare_Resume.pdf'
-    link.click()
-  }
-
   return (
     <section className="min-h-[85vh] flex items-center pt-16">
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
@@ -52,13 +45,26 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <button
-              onClick={downloadCV}
+            {/* VIEW: opens the resume in a new tab so it is displayed right away */}
+            <a
+              href="/Hnok_Amare_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
             >
+              <Eye className="w-5 h-5" />
+              View Resume
+            </a>
+
+            {/* DOWNLOAD: saves the PDF to the device */}
+            <a
+              href="/Hnok_Amare_Resume.pdf"
+              download="Henok_Amare_Resume.pdf"
+              className="flex items-center gap-2 px-6 py-3 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-all"
+            >
               <Download className="w-5 h-5" />
-              Download Resume
-            </button>
+              Download
+            </a>
 
             <a
               href="#contact"
