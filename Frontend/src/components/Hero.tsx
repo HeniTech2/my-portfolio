@@ -1,18 +1,20 @@
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Download, ArrowRight, Eye } from 'lucide-react'
 import { ReactTyped } from 'react-typed'
+import { CONTAINER_CLASS } from './Section'
 
 const Hero = () => {
   return (
-    <section className="min-h-[85vh] flex items-center pt-16">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
+    <section id="home" className="min-h-[85vh] flex items-center py-12 md:py-16">
+      {/* Two equal columns: text touches the left edge, photo touches the right edge of max-w-7xl */}
+      <div className={`${CONTAINER_CLASS} grid md:grid-cols-2 items-center gap-10 lg:gap-16`}>
 
         {/* LEFT SIDE */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -24 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-5 flex-1 max-w-xl"
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="space-y-5 w-full"
         >
           <div className="text-purple-400 font-medium">
             Available for work
@@ -39,7 +41,7 @@ const Hero = () => {
             />
           </div>
 
-          <p className="text-gray-400 text-base leading-relaxed max-w-md">
+          <p className="text-gray-400 text-base leading-relaxed max-w-xl">
             Passionate about building scalable web applications and creating seamless user experiences.
             Focused on clean, efficient code and modern technologies.
           </p>
@@ -50,7 +52,7 @@ const Hero = () => {
               href="/Hnok_Amare_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition-shadow"
             >
               <Eye className="w-5 h-5" />
               View Resume
@@ -60,7 +62,7 @@ const Hero = () => {
             <a
               href="/Hnok_Amare_Resume.pdf"
               download="Henok_Amare_Resume.pdf"
-              className="flex items-center gap-2 px-6 py-3 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-all"
+              className="flex items-center gap-2 px-6 py-3 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-colors"
             >
               <Download className="w-5 h-5" />
               Download
@@ -68,7 +70,7 @@ const Hero = () => {
 
             <a
               href="#contact"
-              className="flex items-center gap-2 px-6 py-3 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-all"
+              className="flex items-center gap-2 px-6 py-3 border border-purple-500/50 rounded-full hover:bg-purple-500/10 transition-colors"
             >
               Let's Connect
               <ArrowRight className="w-4 h-4" />
@@ -110,17 +112,17 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* RIGHT SIDE - PROFILE */}
+        {/* RIGHT SIDE - PROFILE (pushed to the right edge on desktop) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex justify-center flex-1"
+          transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="flex justify-center md:justify-end w-full"
         >
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/30 to-cyan-500/30 rounded-full blur-2xl animate-pulse" />
 
-            <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20">
+            <div className="relative w-64 h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-2xl shadow-purple-500/20">
               <img
                 src="/p1.jpg"
                 alt="Henok Amare"

@@ -21,25 +21,25 @@ const Navbar = () => {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.4 }}
         className="fixed top-0 left-0 w-full z-50 bg-[#010e1c]/90 md:bg-black/40 backdrop-blur-md border-b border-white/10"
       >
-        {/* MAIN NAVBAR CONTAINER */}
-        <div className="flex items-center justify-between px-6 py-4">
+        {/* MAIN NAVBAR CONTAINER: full width, logo touches the left edge, menu touches the right edge */}
+        <div className="flex w-full items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-16 py-4">
 
           {/* LOGO */}
           <Logo />
 
           {/* DESKTOP MENU */}
-          <div className="hidden md:flex gap-6">
+          <div className="hidden md:flex gap-8 lg:gap-10">
             {navItems.map((item, idx) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="text-gray-200 hover:text-white transition-colors text-sm"
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+                className="text-gray-200 hover:text-white transition-colors text-base"
               >
                 {item}
               </motion.a>
@@ -75,7 +75,7 @@ const Navbar = () => {
           <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-purple-500/10 blur-3xl" />
 
           {/* TOP BAR */}
-          <div className="relative flex items-center justify-between px-6 py-4 border-b border-white/10">
+          <div className="relative flex items-center justify-between px-4 sm:px-6 py-4 border-b border-white/10">
             <Logo />
             <button
               onClick={() => setOpen(false)}

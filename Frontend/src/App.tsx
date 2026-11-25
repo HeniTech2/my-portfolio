@@ -21,7 +21,9 @@ function App() {
       <Navbar />
       {/* Overlay for content (only for main content, not navbar) */}
       <div className="relative z-10 bg-white/5 backdrop-blur-[1px]">
-        <main className="pt-20">   {/* pt-20 prevents content from hiding under fixed navbar */}
+        {/* pt-20 prevents content from hiding under fixed navbar.
+            Every section uses the same max-w-7xl container (see components/Section.tsx) */}
+        <main className="pt-20">
           <Hero />
           <Experience />
           <Education />
