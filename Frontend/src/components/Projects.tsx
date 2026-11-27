@@ -27,7 +27,7 @@ const projects: Project[] = [
     name: 'College Management System',
     desc: 'Full‑stack college management system with 24 modules for admin, teacher and student roles, built on a config‑driven frontend and a generic CRUD API.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Express', 'Prisma', 'PostgreSQL'],
-    inProgress: true,
+    demo: 'https://himara-college.onrender.com',
   },
 ]
 
